@@ -1,19 +1,17 @@
 import React, { useState } from "react";
-
-import type { FieldProps } from "@fluentui/react-components";
 import { Dropdown, Field, Input, useId, Option } from "@fluentui/react-components";
 import { Button } from "@fluentui/react-components";
 
 export default function ShipDesigner() {
-	const [first, setfirst] = useState<string[]>(["y"]);
-	// const [selected, setSelected] = useState<string>(["Weapon"]);
+	const [first, setfirst] = useState<string[]>([]);
+	const [selected, setSelected] = useState<string>("");
 
 	const items = first.map((x) =>
-		<p>x</p>
+		<p>x, {x}</p>
 	);
 
 	const addItem = () => {
-		const newFeatures = [...first, "x"];
+		const newFeatures = [...first, selected];
 		setfirst(newFeatures);
 	};
 
@@ -22,7 +20,12 @@ export default function ShipDesigner() {
 	return (
 		<>
 			<div>ShipDesigner</div>
-			<p>Wth</p>
+			<p>Core modules</p>
+			<p>Sensor</p>
+			<p>Shields</p>
+			<p>Power Generator</p>
+			<p>Hangar</p>
+			<p>Hyperdrive</p>
 			{items}
 			<Field label="Ship Class">
 				<Input />
@@ -32,7 +35,7 @@ export default function ShipDesigner() {
 			<Dropdown
 				aria-labelledby={dropdownId}
 				placeholder="Select A Type"
-				// onSelect={(x) => setSelected(x)}
+				onOptionSelect={(x, y) => setSelected(y.optionValue || "")}
 			>
 				{options.map((option) => (
 					<Option key={option}>
